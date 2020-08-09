@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/mall-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-common/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-coupon/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-coupon/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-member/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-member/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-order/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-order/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-product/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-product/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-ware/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-ware/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/renren-generator/src/main/java" charset="UTF-8" />
+  </component>
+</project>

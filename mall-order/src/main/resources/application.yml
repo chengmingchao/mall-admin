@@ -1,0 +1,23 @@
+server:
+  port: 9000
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/mall_oms?characterEncoding=UTF-8
+    username: root
+    password: 123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  application:
+    name: mall-order
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/**/*.xml
+  type-aliases-package: com.cmc.mall.order.entity
+  global-config:
+    db-config:
+      id-type: auto

@@ -1,0 +1,23 @@
+server:
+  port: 10000
+
+spring:
+  application:
+    name: mall-product
+  datasource:
+    url: jdbc:mysql://localhost:3306/mall_pms?characterEncoding=UTF-8
+    username: root
+    password: 123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  type-aliases-package: com.cmc.mall.product.entity
+  global-config:
+    db-config:
+      id-type: auto
+
