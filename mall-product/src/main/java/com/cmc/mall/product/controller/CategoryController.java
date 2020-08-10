@@ -1,6 +1,7 @@
 package com.cmc.mall.product.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +37,9 @@ public class CategoryController {
     @RequestMapping("/list")
     //@RequiresPermissions("product:category:list")
     public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = categoryService.queryPage(params);
+        List<CategoryEntity> list = categoryService.tree();
 
-        return R.ok().put("page", page);
+        return R.ok().put("data", list);
     }
 
 

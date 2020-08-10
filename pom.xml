@@ -15,6 +15,7 @@
         <module>mall-member</module>
         <module>mall-order</module>
         <module>mall-ware</module>
+        <module>mall-gateway</module>
     </modules>
     <dependencyManagement>
         <dependencies>
