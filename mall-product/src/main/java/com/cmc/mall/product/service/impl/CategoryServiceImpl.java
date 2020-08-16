@@ -43,15 +43,17 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
                     e.setChildren(getChildrens(e, allCategory));
                     return e;
                 })
-                .sorted((e1,e2)->
-                    Integer.compare(e1.getSort()==null?0:e1.getSort(),(e2.getSort()==null?0:e2.getSort()))
+                .sorted((e1, e2) ->
+                        Integer.compare(e1.getSort() == null ? 0 : e1.getSort(), (e2.getSort() == null ? 0 : e2.getSort()))
                 )
                 .collect(Collectors.toList());  //过滤得到一级分类
         return firstCategory;
     }
 
+
     /**
      * 递归查找子菜单
+     *
      * @param categoryEntity
      * @param allCategory
      * @return
@@ -59,13 +61,19 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
     public List<CategoryEntity> getChildrens(CategoryEntity categoryEntity, List<CategoryEntity> allCategory) {
         List<CategoryEntity> childrenCategory = allCategory.stream()
                 .filter(e -> e.getParentCid() == categoryEntity.getCatId())
-                .map(e->{
-                    e.setChildren(getChildrens(e,allCategory)); //递归查找
+                .map(e -> {
+                    e.setChildren(getChildrens(e, allCategory)); //递归查找
                     return e;
                 })
-                .sorted((e1,e2)-> Integer.compare(e1.getSort()==null?0:e1.getSort(),(e2.getSort()==null?0:e2.getSort())))
+                .sorted((e1, e2) -> Integer.compare(e1.getSort() == null ? 0 : e1.getSort(), (e2.getSort() == null ? 0 : e2.getSort())))
                 .collect(Collectors.toList());
 
         return childrenCategory;
+    }
+
+    @Override
+    public void deleteByIds(List<Long> asList) {
+        //TODO 检查当前删除的菜单是否有其他地方引用
+        baseMapper.deleteBatchIds(asList);
     }
 }
