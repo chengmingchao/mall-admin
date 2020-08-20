@@ -1,0 +1,19 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: mall-system
+  datasource:
+    url: jdbc:mysql://localhost:3306/mall_admin?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/**/*.xml
+  type-aliases-package: com.cmc.mall.system.entity
+
+logging:
+  level:
+    com.cmc.mall.system: debug

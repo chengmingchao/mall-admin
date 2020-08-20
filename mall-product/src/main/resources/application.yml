@@ -5,15 +5,17 @@ spring:
   application:
     name: mall-product
   datasource:
-    url: jdbc:mysql://localhost:3306/mall_pms?characterEncoding=UTF-8
+#    url: jdbc:mysql://10.241.59.15:3306/mall_pms?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+    url: jdbc:mysql://127.0.0.1:3306/mall_pms?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
     username: root
+#    password: Wonders,2009
     password: 123
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
   cloud:
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8848
+        server-addr: 10.241.59.8:8848
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**/*.xml
   type-aliases-package: com.cmc.mall.product.entity
@@ -22,6 +24,17 @@ mybatis-plus:
       id-type: auto
       logic-delete-value: 1
       logic-not-delete-value: 0
+
 logging:
   level:
     com.cmc.mall.product: debug
+fdfs:
+  # 链接超时
+  connect-timeout: 60
+  # 读取时间
+  so-timeout: 60
+  # 生成缩略图参数
+  thumb-image:
+    width: 150
+    height: 150
+  tracker-list: 192.168.0.105:22122

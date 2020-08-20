@@ -14,5 +14,13 @@
         <result property="sort" column="sort"/>
     </resultMap>
 
+    <select id="queryBrandList" resultMap="brandMap">
+        select * from pms_brand
+        <where>
+            <if test="name != null and name !=''">
+            name like concat('%', #{name}, '%')
+            </if>
+        </where>
 
+    </select>
 </mapper>

@@ -73,13 +73,11 @@ public class CategoryEntity implements Serializable {
 	/**
 	 * 商品数量
 	 */
-	@JsonIgnore
 	private Integer productCount;
 
     /**
      * 子分类
      */
-    @JsonIgnore
     @TableField(exist = false)
 	private List<CategoryEntity> children;
 }

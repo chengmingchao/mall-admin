@@ -16,6 +16,7 @@
         <module>mall-order</module>
         <module>mall-ware</module>
         <module>mall-gateway</module>
+        <module>mall-system</module>
     </modules>
     <dependencyManagement>
         <dependencies>

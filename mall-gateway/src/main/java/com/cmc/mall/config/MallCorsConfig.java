@@ -11,6 +11,7 @@ import org.springframework.web.filter.CorsFilter;
  * @author chengmingchao
  * @version 1.0
  * @date 2020/8/10 10:01 下午
+ * 处理跨域
  */
 @Configuration
 public class MallCorsConfig {
