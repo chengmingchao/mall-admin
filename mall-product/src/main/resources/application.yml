@@ -1,15 +1,15 @@
 server:
-  port: 10000
+  port: 10001
 
 spring:
   application:
     name: mall-product
   datasource:
-#    url: jdbc:mysql://10.241.59.15:3306/mall_pms?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
-    url: jdbc:mysql://127.0.0.1:3306/mall_pms?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+    url: jdbc:mysql://10.241.59.15:3306/mall_pms?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+#    url: jdbc:mysql://127.0.0.1:3306/mall_pms?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
     username: root
-#    password: Wonders,2009
-    password: 123
+    password: Wonders,2009
+#    password: 123
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
   cloud:
@@ -28,13 +28,9 @@ mybatis-plus:
 logging:
   level:
     com.cmc.mall.product: debug
-fdfs:
-  # 链接超时
-  connect-timeout: 60
-  # 读取时间
-  so-timeout: 60
-  # 生成缩略图参数
-  thumb-image:
-    width: 150
-    height: 150
-  tracker-list: 192.168.0.105:22122
+
+#minio配置
+minio:
+  url: http://10.241.59.8:9000/
+  accessKey: minioadmin
+  secretKey: minioadmin

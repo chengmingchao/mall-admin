@@ -80,9 +80,9 @@
             <version>2.9.2</version>
         </dependency>
         <dependency>
-            <groupId>com.github.tobato</groupId>
-            <artifactId>fastdfs-client</artifactId>
-            <version>1.27.2</version>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+            <version>6.0.4</version>
         </dependency>
     </dependencies>
 </project>

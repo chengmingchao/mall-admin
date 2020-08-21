@@ -1,15 +1,12 @@
 package com.cmc.mall.product.controller;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.cmc.common.utils.CommonPage;
 import com.cmc.common.utils.ResultCode;
 import com.cmc.common.valid.AddGroup;
 import com.cmc.common.valid.UpdateGroup;
-import com.cmc.mall.product.config.FileDfsUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang.StringUtils;
@@ -41,8 +38,6 @@ public class BrandController {
     @Autowired
     private BrandService brandService;
 
-    @Resource
-    private FileDfsUtil fileDfsUtil;
     /**
      * 列表
      */
@@ -99,24 +94,5 @@ public class BrandController {
         return R.ok();
     }
 
-    /**
-     * 文件上传
-     */
-    @ApiOperation(value="上传文件", notes="测试FastDFS文件上传")
-    @PostMapping(value = "/uploadFile",headers="content-type=multipart/form-data")
-    public R uploadFile (@RequestParam("file") MultipartFile file){
-        try{
-            String path = fileDfsUtil.upload(file);
-            if (!StringUtils.isEmpty(path)){
-                String result = path ;
-                return R.ok().put("data",result);
-            } else {
-                return R.error(ResultCode.UPLOAD_FAILED.getCode(),ResultCode.UPLOAD_FAILED.getMessage());
-            }
-        } catch (Exception e){
-            e.printStackTrace() ;
-            return R.error(ResultCode.FAILED.getCode(),ResultCode.FAILED.getMessage());
-        }
 
-    }
 }
