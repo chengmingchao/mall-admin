@@ -43,7 +43,7 @@ public class MallExceptionControllerAdvice {
      */
     @ExceptionHandler(Throwable.class)
     public R handleException(Throwable t){
-
+        log.error("捕获异常，{}",t.getMessage());
         return R.error();
     }
 }

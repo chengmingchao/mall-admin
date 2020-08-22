@@ -4,11 +4,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import com.cmc.common.valid.AddGroup;
+import com.cmc.common.valid.UpdateGroup;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import com.cmc.mall.product.entity.CategoryEntity;
@@ -40,7 +43,6 @@ public class CategoryController {
     @GetMapping("/list")
     public R list(){
         List<CategoryEntity> list = categoryService.tree();
-
         return R.ok().put("data", list);
     }
 
@@ -61,8 +63,8 @@ public class CategoryController {
      */
     @PostMapping("/save")
     @ApiOperation("保存商品分类接口")
-    public R save(@RequestBody CategoryEntity category){
-		categoryService.save(category);
+    public R save(@Validated(AddGroup.class) @RequestBody CategoryEntity category){
+        categoryService.save(category);
         return R.ok();
     }
 
@@ -71,7 +73,7 @@ public class CategoryController {
      */
     @PostMapping("/update")
     @ApiOperation("修改商品分类接口")
-    public R update(@RequestBody CategoryEntity category){
+    public R update(@Validated(UpdateGroup.class) @RequestBody CategoryEntity category){
 		categoryService.updateById(category);
 
         return R.ok();

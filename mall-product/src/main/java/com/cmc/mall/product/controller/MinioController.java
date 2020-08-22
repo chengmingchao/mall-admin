@@ -39,7 +39,6 @@ public class MinioController {
     @PostConstruct
     public void init(){
         try {
-            log.error("aaa{}",url);
             minioClient = new MinioClient(url, accessKey, secretKey);
         } catch (Exception e) {
             log.error("初始化MinioClient失败", e);
