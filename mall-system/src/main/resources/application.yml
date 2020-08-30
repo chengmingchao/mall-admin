@@ -9,10 +9,13 @@ spring:
     password: 123
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
-
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
 mybatis-plus:
   mapper-locations: classpath:mapper/**/*.xml
-  type-aliases-package: com.cmc.mall.system.entity
+  type-aliases-package: com.cmc.mall.module.system.entity
 
 logging:
   level:

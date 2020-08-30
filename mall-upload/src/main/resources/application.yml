@@ -1,0 +1,16 @@
+server:
+  port: 1200
+
+spring:
+  application:
+    name: mall-upload
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+
+#minio配置
+minio:
+  url: http://10.241.59.8:9000/
+  accessKey: minioadmin
+  secretKey: minioadmin

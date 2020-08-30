@@ -17,6 +17,8 @@
         <module>mall-ware</module>
         <module>mall-gateway</module>
         <module>mall-system</module>
+        <module>renren-fast</module>
+        <module>mall-upload</module>
     </modules>
     <dependencyManagement>
         <dependencies>

@@ -5,17 +5,17 @@ spring:
   application:
     name: mall-product
   datasource:
-    url: jdbc:mysql://10.241.59.15:3306/mall_pms?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
-#    url: jdbc:mysql://127.0.0.1:3306/mall_pms?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+#    url: jdbc:mysql://10.241.59.15:3306/mall_pms?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+    url: jdbc:mysql://127.0.0.1:3306/mall_pms?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
     username: root
-    password: Wonders,2009
-#    password: 123
+#    password: Wonders,2009
+    password: 123
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
   cloud:
     nacos:
       discovery:
-        server-addr: 10.241.59.8:8848
+        server-addr: 127.0.0.1:8848
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**/*.xml
   type-aliases-package: com.cmc.mall.product.entity
@@ -29,8 +29,4 @@ logging:
   level:
     com.cmc.mall.product: debug
 
-#minio配置
-minio:
-  url: http://10.241.59.8:9000/
-  accessKey: minioadmin
-  secretKey: minioadmin
+

@@ -33,7 +33,7 @@ public class BrandController {
      * 列表
      */
     @ApiOperation("分页获取品牌信息接口")
-    @PostMapping("/list")
+    @GetMapping("/list")
     public R list(@RequestParam(value = "name",required = false) String name,
                   @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                   @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize){

@@ -79,7 +79,6 @@ public class CategoryEntity implements Serializable {
 	/**
 	 * 图标地址
 	 */
-    @NotBlank(groups = AddGroup.class)
     @URL(message = "图标地址必须是合法的url地址",groups = {AddGroup.class,UpdateGroup.class})
     @ApiModelProperty(value = "图标地址")
 	private String icon;
