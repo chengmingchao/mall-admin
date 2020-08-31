@@ -73,7 +73,7 @@ public class ImageController {
             String fileUrl = minioClient.presignedGetObject(bucketName, fileName);  //获取文件下载地址
             String fileContentType = file.getContentType();
             minioClient.putObject(bucketName, fileName, file.getInputStream(),file.getInputStream().available(), fileContentType);
-            return R.ok().put("data",fileUrl);
+            return R.ok().put("fileUrl",fileUrl);
         } catch (Exception e) {
             return R.error(ResultCode.UPLOAD_FAILED.getCode(),ResultCode.UPLOAD_FAILED.getMessage()).put("data",e.getMessage());
         }

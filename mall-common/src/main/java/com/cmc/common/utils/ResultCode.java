@@ -6,7 +6,7 @@ package com.cmc.common.utils;
  * @date 2020/8/17 9:43 下午
  */
 public enum  ResultCode {
-    SUCCESS(00000, "操作成功"),
+    SUCCESS(0, "操作成功"),
     UNKNOWN_EXCEPTION(10000,"系统未知异常"),
     VALIDATE_FAILED(10001, "参数检验失败"),
     UPLOAD_FAILED(10002,"文件上传失败"),
