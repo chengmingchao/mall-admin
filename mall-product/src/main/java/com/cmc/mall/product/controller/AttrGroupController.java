@@ -1,8 +1,10 @@
 package com.cmc.mall.product.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
+import com.cmc.common.utils.CommonPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,12 +35,15 @@ public class AttrGroupController {
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @RequestMapping("/list/{categoryId}")
     //@RequiresPermissions("product:attrgroup:list")
-    public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = attrGroupService.queryPage(params);
-
-        return R.ok().put("page", page);
+    public R list(@PathVariable("categoryId") Long categoryId,
+                  @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                  @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+                  @RequestParam(value = "key") String key
+                  ){
+        List<AttrGroupEntity> list=attrGroupService.queryAttrGroupList(categoryId,pageNum,pageSize,key);
+        return R.ok().put("data",  CommonPage.restPage(list));
     }
 
 

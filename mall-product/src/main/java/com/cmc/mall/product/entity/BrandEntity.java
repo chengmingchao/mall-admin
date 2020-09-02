@@ -38,7 +38,7 @@ public class BrandEntity implements Serializable {
 	 * 品牌名
 	 */
     @ApiModelProperty(value = "品牌名",example = "测试")
-    @NotBlank(message = "品牌名不能为空",groups = {AddGroup.class,UpdateGroup.class})
+    @NotBlank(message = "品牌名不能为空",groups = {AddGroup.class})
 	private String name;
 	/**
 	 * 品牌logo地址
