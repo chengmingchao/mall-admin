@@ -16,11 +16,7 @@
 
     <select id="queryBrandList" resultMap="brandMap">
         select * from pms_brand
-        <where>
-            <if test="name != null and name !=''">
-            name like concat('%', #{name}, '%')
-            </if>
-        </where>
-
+        where brand_id =#{key} or name like concat('%', #{key}, '%')
+        or descript like concat('%', #{key}, '%') or first_letter like concat('%', #{key}, '%')
     </select>
 </mapper>

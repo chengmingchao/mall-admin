@@ -1,5 +1,6 @@
 package com.cmc.mall.product.service.impl;
 
+import com.cmc.mall.product.entity.PageAndKeyParams;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,9 +33,9 @@ public class BrandServiceImpl extends ServiceImpl<BrandDao, BrandEntity> impleme
     }
 
     @Override
-    public List<BrandEntity> queryBrandList(String name,int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum,pageSize);
-        return brandDao.queryBrandList(name);
+    public List<BrandEntity> queryBrandList(PageAndKeyParams pageAndKeyParams) {
+        PageHelper.startPage(pageAndKeyParams.getPageNum(),pageAndKeyParams.getPageSize());
+        return brandDao.queryBrandList(pageAndKeyParams);
     }
 
 }

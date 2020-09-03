@@ -1,6 +1,7 @@
 package com.cmc.mall.product.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,10 +36,11 @@ public class CategoryBrandRelationController {
      */
     @RequestMapping("/list")
     //@RequiresPermissions("product:categorybrandrelation:list")
-    public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = categoryBrandRelationService.queryPage(params);
+    public R list(@RequestParam("brandId") Long brandId){
+//        PageUtils page = categoryBrandRelationService.queryPage(params);
 
-        return R.ok().put("page", page);
+        List<CategoryBrandRelationEntity> list = categoryBrandRelationService.getByBrandId(brandId);
+        return R.ok().put("data",list);
     }
 
 

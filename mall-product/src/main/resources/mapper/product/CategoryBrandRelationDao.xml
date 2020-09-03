@@ -3,7 +3,7 @@
 
 <mapper namespace="com.cmc.mall.product.dao.CategoryBrandRelationDao">
 
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.cmc.mall.product.entity.CategoryBrandRelationEntity" id="categoryBrandRelationMap">
         <result property="id" column="id"/>
         <result property="brandId" column="brand_id"/>
@@ -12,5 +12,7 @@
         <result property="catelogName" column="catelog_name"/>
     </resultMap>
 
-
+    <select id="getByBrandId" resultMap="categoryBrandRelationMap">
+    select * from pms_category_brand_relation where brand_id=#{brandId}
+    </select>
 </mapper>

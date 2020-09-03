@@ -2,6 +2,7 @@ package com.cmc.mall.product.dao;
 
 import com.cmc.mall.product.entity.BrandEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.cmc.mall.product.entity.PageAndKeyParams;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -17,5 +18,5 @@ import java.util.List;
 @Mapper
 public interface BrandDao extends BaseMapper<BrandEntity> {
 
-    List<BrandEntity> queryBrandList(@Param("name") String name);
+    List<BrandEntity> queryBrandList(PageAndKeyParams pageAndKeyParams);
 }

@@ -3,6 +3,9 @@ package com.cmc.mall.product.dao;
 import com.cmc.mall.product.entity.CategoryBrandRelationEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * 品牌分类关联
@@ -13,5 +16,5 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface CategoryBrandRelationDao extends BaseMapper<CategoryBrandRelationEntity> {
-	
+	List<CategoryBrandRelationEntity> getByBrandId(@Param("brandId") Long brandId);
 }

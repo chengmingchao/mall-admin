@@ -4,6 +4,8 @@ import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -76,4 +78,22 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         //TODO 检查当前删除的菜单是否有其他地方引用
         baseMapper.deleteBatchIds(asList);
     }
+
+    @Override
+    public Long[] getCatelogPath(Long catelogId) {
+        List<Long> pathList=new ArrayList<>();
+        List<Long> parentPath = getParentPath(catelogId, pathList);
+        Collections.reverse(parentPath);
+        return parentPath.toArray(new Long[parentPath.size()]);
+    }
+
+    private List<Long> getParentPath(Long catelogId,List<Long> pathList){
+        pathList.add(catelogId);
+        CategoryEntity categoryEntity = baseMapper.selectById(catelogId);
+        if (categoryEntity.getParentCid()!=0){
+            getParentPath(categoryEntity.getParentCid(),pathList);
+        }
+        return pathList;
+    }
+
 }
