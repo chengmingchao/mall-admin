@@ -1,5 +1,6 @@
 package com.cmc.mall.product.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
@@ -57,4 +58,15 @@ public class AttrEntity implements Serializable {
 	 */
 	private Integer showDesc;
 
+    @TableField(exist = false)
+    private Long attrGroupId;
+
+    @TableField(exist = false)
+    private String catelogName;
+
+    @TableField(exist = false)
+    private String groupName;
+
+    @TableField(exist = false)
+    private Long[] catelogPath;
 }

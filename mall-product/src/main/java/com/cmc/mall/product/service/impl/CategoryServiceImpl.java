@@ -1,6 +1,9 @@
 package com.cmc.mall.product.service.impl;
 
+import com.cmc.mall.product.dao.CategoryBrandRelationDao;
+import com.cmc.mall.product.service.CategoryBrandRelationService;
 import net.bytebuddy.asm.Advice;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,12 +22,15 @@ import com.cmc.common.utils.Query;
 import com.cmc.mall.product.dao.CategoryDao;
 import com.cmc.mall.product.entity.CategoryEntity;
 import com.cmc.mall.product.service.CategoryService;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service("categoryService")
 public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity> implements CategoryService {
 
     @Autowired
+    private CategoryBrandRelationService categoryBrandRelationService;
+
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
@@ -85,6 +91,16 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         List<Long> parentPath = getParentPath(catelogId, pathList);
         Collections.reverse(parentPath);
         return parentPath.toArray(new Long[parentPath.size()]);
+    }
+
+    @Transactional
+    @Override
+    public void updateAllById(CategoryEntity category) {
+        baseMapper.updateById(category);
+        if (!StringUtils.isEmpty(category.getName())){
+            categoryBrandRelationService.updateByCategory(category.getCatId(),category.getName());
+            //TODO 更新其他地方引用的分类信息
+        }
     }
 
     private List<Long> getParentPath(Long catelogId,List<Long> pathList){

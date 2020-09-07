@@ -74,8 +74,7 @@ public class CategoryController {
     @PostMapping("/update")
     @ApiOperation("修改商品分类接口")
     public R update(@Validated(UpdateGroup.class) @RequestBody CategoryEntity category){
-		categoryService.updateById(category);
-
+		categoryService.updateAllById(category);
         return R.ok();
     }
 

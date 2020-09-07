@@ -1,14 +1,13 @@
 package com.cmc.mall.product.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
+import com.cmc.common.utils.CommonPage;
+import com.cmc.mall.product.entity.PageAndKeyParams;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.cmc.mall.product.entity.AttrEntity;
 import com.cmc.mall.product.service.AttrService;
@@ -30,6 +29,11 @@ public class AttrController {
     @Autowired
     private AttrService attrService;
 
+    @GetMapping("base/list/{catelogId}")
+    public R baseList(@PathVariable("catelogId") Long catelogId, PageAndKeyParams pageAndKeyParams){
+        List<AttrEntity> list=attrService.getBaseAttrList(catelogId,pageAndKeyParams);
+        return R.ok().put("data", CommonPage.restPage(list));
+    }
     /**
      * 列表
      */
@@ -48,9 +52,8 @@ public class AttrController {
     @RequestMapping("/info/{attrId}")
     //@RequiresPermissions("product:attr:info")
     public R info(@PathVariable("attrId") Long attrId){
-		AttrEntity attr = attrService.getById(attrId);
-
-        return R.ok().put("attr", attr);
+        AttrEntity attr=attrService.getbaseById(attrId);
+        return R.ok().put("data", attr);
     }
 
     /**
@@ -59,7 +62,7 @@ public class AttrController {
     @RequestMapping("/save")
     //@RequiresPermissions("product:attr:save")
     public R save(@RequestBody AttrEntity attr){
-		attrService.save(attr);
+		attrService.saveAll(attr);
 
         return R.ok();
     }
@@ -70,7 +73,7 @@ public class AttrController {
     @RequestMapping("/update")
     //@RequiresPermissions("product:attr:update")
     public R update(@RequestBody AttrEntity attr){
-		attrService.updateById(attr);
+		attrService.updateAttr(attr);
 
         return R.ok();
     }

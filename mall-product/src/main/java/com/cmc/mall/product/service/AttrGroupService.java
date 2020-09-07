@@ -3,6 +3,7 @@ package com.cmc.mall.product.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.cmc.common.utils.PageUtils;
 import com.cmc.mall.product.entity.AttrGroupEntity;
+import com.cmc.mall.product.entity.PageAndKeyParams;
 
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,6 @@ import java.util.Map;
  */
 public interface AttrGroupService extends IService<AttrGroupEntity> {
 
-    List<AttrGroupEntity> queryAttrGroupList(Long categoryId, Integer pageNum, Integer pageSize,String key);
+    List<AttrGroupEntity> queryAttrGroupList(Long categoryId, PageAndKeyParams pageAndKeyParams);
 }
 

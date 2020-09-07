@@ -20,5 +20,7 @@ public interface BrandService extends IService<BrandEntity> {
     PageUtils queryPage(Map<String, Object> params);
 
     List<BrandEntity> queryBrandList(PageAndKeyParams pageAndKeyParams);
+
+    void updateAllById(BrandEntity brand);
 }
 

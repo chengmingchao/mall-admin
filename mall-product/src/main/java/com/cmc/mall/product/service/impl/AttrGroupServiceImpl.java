@@ -1,5 +1,6 @@
 package com.cmc.mall.product.service.impl;
 
+import com.cmc.mall.product.entity.PageAndKeyParams;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,15 +25,9 @@ public class AttrGroupServiceImpl extends ServiceImpl<AttrGroupDao, AttrGroupEnt
     private AttrGroupDao attrGroupDao;
 
     @Override
-    public List<AttrGroupEntity> queryAttrGroupList(Long categoryId, Integer pageNum, Integer pageSize,String key) {
-        PageHelper.startPage(pageNum,pageSize);
-        List<AttrGroupEntity> attrGroupEntities;
-        if (categoryId==0){
-            attrGroupEntities = attrGroupDao.selectList(null);
-        }else {
-            attrGroupEntities=attrGroupDao.selectListByCategoryId(categoryId,key);
-        }
-        return attrGroupEntities;
+    public List<AttrGroupEntity> queryAttrGroupList(Long categoryId, PageAndKeyParams pageAndKeyParams) {
+        PageHelper.startPage(pageAndKeyParams.getPageNum(),pageAndKeyParams.getPageSize());
+        return attrGroupDao.selectListByCategoryId(categoryId,pageAndKeyParams.getKey());
     }
 
 }

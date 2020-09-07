@@ -5,11 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.cmc.mall.product.entity.CategoryBrandRelationEntity;
 import com.cmc.mall.product.service.CategoryBrandRelationService;
@@ -34,11 +30,9 @@ public class CategoryBrandRelationController {
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @GetMapping("/list")
     //@RequiresPermissions("product:categorybrandrelation:list")
     public R list(@RequestParam("brandId") Long brandId){
-//        PageUtils page = categoryBrandRelationService.queryPage(params);
-
         List<CategoryBrandRelationEntity> list = categoryBrandRelationService.getByBrandId(brandId);
         return R.ok().put("data",list);
     }
@@ -61,7 +55,9 @@ public class CategoryBrandRelationController {
     @RequestMapping("/save")
     //@RequiresPermissions("product:categorybrandrelation:save")
     public R save(@RequestBody CategoryBrandRelationEntity categoryBrandRelation){
-		categoryBrandRelationService.save(categoryBrandRelation);
+
+
+		categoryBrandRelationService.saveRelation(categoryBrandRelation);
 
         return R.ok();
     }

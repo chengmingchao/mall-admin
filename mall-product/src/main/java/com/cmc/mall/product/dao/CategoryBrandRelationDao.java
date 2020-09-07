@@ -17,4 +17,8 @@ import java.util.List;
 @Mapper
 public interface CategoryBrandRelationDao extends BaseMapper<CategoryBrandRelationEntity> {
 	List<CategoryBrandRelationEntity> getByBrandId(@Param("brandId") Long brandId);
+
+	void updateByCategory(@Param("catId") Long catId,@Param("catName") String catName);
+
+    void updateByBrand(@Param("brandId") Long brandId,@Param("brandName") String brandName);
 }

@@ -15,7 +15,11 @@
 
     <select id="selectListByCategoryId" resultMap="attrGroupMap">
     select * from pms_attr_group
-    where catelog_id=#{categoryId} and
-    (attr_group_id=#{key} or attr_group_name like concat('%', #{key}, '%'))
+    <where>
+        <if test="categoryId!=0 and categoryId !=null">
+            catelog_id=#{categoryId}
+        </if>
+        and (attr_group_id=#{key} or attr_group_name like concat('%', #{key}, '%'))
+    </where>
 </select>
 </mapper>

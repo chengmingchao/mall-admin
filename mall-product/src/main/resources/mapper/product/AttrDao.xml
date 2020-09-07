@@ -3,7 +3,7 @@
 
 <mapper namespace="com.cmc.mall.product.dao.AttrDao">
 
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.cmc.mall.product.entity.AttrEntity" id="attrMap">
         <result property="attrId" column="attr_id"/>
         <result property="attrName" column="attr_name"/>
@@ -16,5 +16,13 @@
         <result property="showDesc" column="show_desc"/>
     </resultMap>
 
-
+    <select id="getBaseAttr" resultMap="attrMap">
+        select * from pms_attr
+        <where>
+            <if test="catelogId!=0 and catelogId!=null">
+                catelog_id=#{catelogId}
+            </if>
+            and (attr_id=#{key} or attr_name like concat('%', #{key}, '%') or catelog_id=#{key})
+        </where>
+    </select>
 </mapper>
