@@ -9,6 +9,8 @@ import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -41,6 +43,7 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
 
     @Autowired
     private CategoryServiceImpl categoryService;
+
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         IPage<AttrEntity> page = this.page(
@@ -55,27 +58,33 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
     @Override
     public void saveAll(AttrEntity attr) {
         this.save(attr);
-
-        AttrAttrgroupRelationEntity attrAttrgroupRelationEntity = new AttrAttrgroupRelationEntity();
-        attrAttrgroupRelationEntity.setAttrId(attr.getAttrId());
-        attrAttrgroupRelationEntity.setAttrGroupId(attr.getAttrGroupId());
-        attrAttrgroupRelationDao.insert(attrAttrgroupRelationEntity);
+        if (attr.getAttrType() == 1) {
+            AttrAttrgroupRelationEntity attrAttrgroupRelationEntity = new AttrAttrgroupRelationEntity();
+            attrAttrgroupRelationEntity.setAttrId(attr.getAttrId());
+            attrAttrgroupRelationEntity.setAttrGroupId(attr.getAttrGroupId());
+            attrAttrgroupRelationDao.insert(attrAttrgroupRelationEntity);
+        }
     }
 
     @Override
-    public List<AttrEntity> getBaseAttrList(Long catelogId, PageAndKeyParams pageAndKeyParams) {
-        PageHelper.startPage(pageAndKeyParams.getPageNum(),pageAndKeyParams.getPageSize());
-        List<AttrEntity> baseAttr = attrDao.getBaseAttr(catelogId, pageAndKeyParams.getKey());
-        List<AttrEntity> list=baseAttr.stream().map((b)->{
+    public List<AttrEntity> getBaseAttrList(Long catelogId, PageAndKeyParams pageAndKeyParams, String attrType) {
+        PageHelper.startPage(pageAndKeyParams.getPageNum(), pageAndKeyParams.getPageSize());
+        String type = "base".equalsIgnoreCase(attrType) ? "1" : "0";
+        List<AttrEntity> baseAttr = attrDao.getBaseAttr(catelogId, pageAndKeyParams.getKey(), type);
+        String finalAttrType = attrType;
+        List<AttrEntity> list = baseAttr.stream().map((b) -> {
             CategoryEntity categoryEntity = categoryDao.selectById(b.getCatelogId());
-            if (categoryEntity!=null){
+            if (categoryEntity != null) {
                 b.setCatelogName(categoryEntity.getName());
             }
-            AttrAttrgroupRelationEntity byattrId = attrAttrgroupRelationDao.getByattrId(b.getAttrId());
-            if (byattrId!=null){
-                AttrGroupEntity attrGroupEntity = attrGroupDao.selectById(byattrId.getAttrGroupId());
-                b.setGroupName(attrGroupEntity.getAttrGroupName());
+            if ("base".equalsIgnoreCase(finalAttrType)) {
+                AttrAttrgroupRelationEntity byattrId = attrAttrgroupRelationDao.getByattrId(b.getAttrId());
+                if (byattrId != null) {
+                    AttrGroupEntity attrGroupEntity = attrGroupDao.selectById(byattrId.getAttrGroupId());
+                    b.setGroupName(attrGroupEntity.getAttrGroupName());
+                }
             }
+
             return b;
         }).collect(Collectors.toList());
         return list;
@@ -84,13 +93,15 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
     @Override
     public AttrEntity getbaseById(Long attrId) {
         AttrEntity attrEntity = this.getById(attrId);
-        if (attrEntity!=null){
+        if (attrEntity != null) {
             Long[] catelogPath = categoryService.getCatelogPath(attrEntity.getCatelogId());
             attrEntity.setCatelogPath(catelogPath);
         }
-        AttrAttrgroupRelationEntity attrAttrgroupRelationEntity = attrAttrgroupRelationDao.getByattrId(attrId);
-        if (attrAttrgroupRelationEntity!=null){
-            attrEntity.setAttrGroupId(attrAttrgroupRelationEntity.getAttrGroupId());
+        if (attrEntity.getAttrType() == 1) {
+            AttrAttrgroupRelationEntity attrAttrgroupRelationEntity = attrAttrgroupRelationDao.getByattrId(attrId);
+            if (attrAttrgroupRelationEntity != null) {
+                attrEntity.setAttrGroupId(attrAttrgroupRelationEntity.getAttrGroupId());
+            }
         }
         return attrEntity;
     }
@@ -99,15 +110,55 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
     @Override
     public void updateAttr(AttrEntity attr) {
         this.updateById(attr);
-        Integer count = attrAttrgroupRelationDao.selectCount(new QueryWrapper<AttrAttrgroupRelationEntity>().eq("attr_id", attr.getAttrId()));
-        AttrAttrgroupRelationEntity relationEntity=new AttrAttrgroupRelationEntity();
-        relationEntity.setAttrGroupId(attr.getAttrGroupId());
-        relationEntity.setAttrId(attr.getAttrId());
-        if (count>0){
-            attrAttrgroupRelationDao.updateAttrGroupId(relationEntity);
-        }else {
-            attrAttrgroupRelationDao.insert(relationEntity);
+        if (attr.getAttrType() == 1) {
+            Integer count = attrAttrgroupRelationDao.selectCount(new QueryWrapper<AttrAttrgroupRelationEntity>().eq("attr_id", attr.getAttrId()));
+            AttrAttrgroupRelationEntity relationEntity = new AttrAttrgroupRelationEntity();
+            relationEntity.setAttrGroupId(attr.getAttrGroupId());
+            relationEntity.setAttrId(attr.getAttrId());
+            if (count > 0) {
+                attrAttrgroupRelationDao.updateAttrGroupId(relationEntity);
+            } else {
+                attrAttrgroupRelationDao.insert(relationEntity);
+            }
         }
+    }
 
+    @Override
+    public List<AttrEntity> getAttrRealation(Long attrgroupId) {
+        List<AttrAttrgroupRelationEntity> relationEntities=attrAttrgroupRelationDao.getByattrGroupId(attrgroupId);
+        List<Long> ids = relationEntities.stream().map((e) -> {
+            return e.getAttrId();
+        }).collect(Collectors.toList());
+        if (ids==null||ids.size()==0){
+            return null;
+        }
+        List<AttrEntity> attrEntities = attrDao.selectBatchIds(ids);
+        return attrEntities;
+    }
+
+    @Override
+    public void deleteRelation(AttrAttrgroupRelationEntity[] relationEntities) {
+        List<AttrAttrgroupRelationEntity> collect = Arrays.stream(relationEntities).collect(Collectors.toList());
+        attrAttrgroupRelationDao.deleteRelation(collect);
+    }
+
+    @Override
+    public List<AttrEntity> getNoattrRelation(Long attrgroupId,PageAndKeyParams pageAndKeyParams) {
+        List<AttrAttrgroupRelationEntity> attrgroupRelationEntities = attrAttrgroupRelationDao.getByattrGroupId(attrgroupId);
+        List<Long> attrIds = attrgroupRelationEntities.stream().map((e) ->
+                e.getAttrId()).collect(Collectors.toList());
+        List<AttrEntity> attrEntities;
+        if (attrIds.size()==0||attrIds==null){
+            attrEntities = attrDao.getBaseAttr(null,pageAndKeyParams.getKey(),null);
+        }else {
+            attrEntities = attrDao.getNoattrRelation(attrIds,pageAndKeyParams.getKey());
+        }
+        return attrEntities;
+    }
+
+    @Override
+    public void saveAttrRelation(AttrAttrgroupRelationEntity[] relationEntities) {
+        List<AttrAttrgroupRelationEntity> attrgroupRelationEntities = Arrays.stream(relationEntities).collect(Collectors.toList());
+        attrAttrgroupRelationDao.batchSaveAttrRelation(attrgroupRelationEntities);
     }
 }

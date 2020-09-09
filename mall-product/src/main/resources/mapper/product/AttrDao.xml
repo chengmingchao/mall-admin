@@ -22,7 +22,20 @@
             <if test="catelogId!=0 and catelogId!=null">
                 catelog_id=#{catelogId}
             </if>
+            <if test="attrType !=null and attrType !=''">
+                and attr_type=#{attrType}
+            </if>
             and (attr_id=#{key} or attr_name like concat('%', #{key}, '%') or catelog_id=#{key})
         </where>
+    </select>
+
+    <select id="getNoattrRelation" resultMap="attrMap">
+        select * from pms_attr
+        where attr_id not in (
+        <foreach collection="attrIds" separator="," item="item" >
+            #{item}
+        </foreach>
+        )
+        and (attr_id=#{key} or attr_name like concat('%', #{key}, '%') or catelog_id=#{key})
     </select>
 </mapper>

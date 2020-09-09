@@ -2,6 +2,7 @@ package com.cmc.mall.product.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.cmc.common.utils.PageUtils;
+import com.cmc.mall.product.entity.AttrAttrgroupRelationEntity;
 import com.cmc.mall.product.entity.AttrEntity;
 import com.cmc.mall.product.entity.PageAndKeyParams;
 
@@ -21,10 +22,18 @@ public interface AttrService extends IService<AttrEntity> {
 
     void saveAll(AttrEntity attr);
 
-    List<AttrEntity> getBaseAttrList(Long catelogId, PageAndKeyParams pageAndKeyParams);
+    List<AttrEntity> getBaseAttrList(Long catelogId, PageAndKeyParams pageAndKeyParams,String attrType);
 
     AttrEntity getbaseById(Long attrId);
 
     void updateAttr(AttrEntity attr);
+
+    List<AttrEntity> getAttrRealation(Long attrgroupId);
+
+    void deleteRelation(AttrAttrgroupRelationEntity[] relationEntities);
+
+    List<AttrEntity> getNoattrRelation(Long attrgroupId,PageAndKeyParams pageAndKeyParams);
+
+    void saveAttrRelation(AttrAttrgroupRelationEntity[] relationEntities);
 }
 

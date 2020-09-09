@@ -10,11 +10,28 @@
         <result property="attrGroupId" column="attr_group_id"/>
         <result property="attrSort" column="attr_sort"/>
     </resultMap>
+    <insert id="batchSaveAttrRelation">
+        insert into pms_attr_attrgroup_relation(attr_id,attr_group_id) values
+        <foreach collection="attrgroupRelationEntities" item="item" separator=",">
+            (#{item.attrId},#{item.attrGroupId})
+        </foreach>
+    </insert>
+    <delete id="deleteRelation">
+        delete from pms_attr_attrgroup_relation where
+        <foreach collection="entities" item="item" separator=" OR ">
+            (attr_id=#{item.attrId} and attr_group_id=#{item.attrGroupId})
+        </foreach>
+    </delete>
     <select id="getByattrId" resultMap="attrAttrgroupRelationMap">
         select * from pms_attr_attrgroup_relation where attr_id=#{attrId} limit 1
+    </select>
+
+    <select id="getByattrGroupId" resultMap="attrAttrgroupRelationMap">
+        select * from pms_attr_attrgroup_relation where attr_group_id=#{attrgroupId}
     </select>
     
     <update id="updateAttrGroupId">
         update pms_attr_attrgroup_relation set attr_group_id=#{attrGroupId} where attr_id=#{attrId}
     </update>
+
 </mapper>

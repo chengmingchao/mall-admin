@@ -5,14 +5,13 @@ import java.util.List;
 import java.util.Map;
 
 import com.cmc.common.utils.CommonPage;
+import com.cmc.mall.product.entity.AttrAttrgroupRelationEntity;
+import com.cmc.mall.product.entity.AttrEntity;
 import com.cmc.mall.product.entity.PageAndKeyParams;
+import com.cmc.mall.product.service.AttrService;
 import com.cmc.mall.product.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.cmc.mall.product.entity.AttrGroupEntity;
 import com.cmc.mall.product.service.AttrGroupService;
@@ -37,6 +36,37 @@ public class AttrGroupController {
     @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    private AttrService attrService;
+
+    @PostMapping("attr/relation")
+    public R attrRelation(@RequestBody AttrAttrgroupRelationEntity[] relationEntities){
+        attrService.saveAttrRelation(relationEntities);
+        return R.ok();
+    }
+    //this.attrGroupId + "/noattr/relation"
+    @GetMapping("/{attrgroupId}/noattr/relation")
+    public R noattrRelation(@PathVariable("attrgroupId") Long attrgroupId, PageAndKeyParams pageAndKeyParams){
+        List<AttrEntity> list=attrService.getNoattrRelation(attrgroupId,pageAndKeyParams);
+        return R.ok().put("data",CommonPage.restPage(list));
+    }
+
+    @GetMapping("/{attrgroupId}/attr/relation")
+    public R attrRelation(@PathVariable("attrgroupId") Long attrgroupId) {
+        List<AttrEntity> attrEntities=attrService.getAttrRealation(attrgroupId);
+        return R.ok().put("data",attrEntities);
+    }
+
+    /**
+     * 删除属性关联
+     * @param relationEntities
+     * @return
+     */
+    @PostMapping("/attr/relation/delete")
+    public R deleteRelation(@RequestBody AttrAttrgroupRelationEntity[] relationEntities){
+        attrService.deleteRelation(relationEntities);
+        return R.ok();
+    }
     /**
      * 列表
      */

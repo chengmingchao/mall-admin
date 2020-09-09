@@ -17,6 +17,7 @@ import java.util.List;
 @Mapper
 public interface AttrDao extends BaseMapper<AttrEntity> {
 
-    List<AttrEntity> getBaseAttr(@Param("catelogId") Long catelogId,@Param("key") String key);
+    List<AttrEntity> getBaseAttr(@Param("catelogId") Long catelogId,@Param("key") String key,@Param("attrType") String attrType);
 
+    List<AttrEntity> getNoattrRelation(@Param("attrIds") List<Long> attrIds,@Param("key") String key);
 }

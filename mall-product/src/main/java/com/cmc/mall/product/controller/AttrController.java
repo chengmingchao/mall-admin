@@ -29,11 +29,13 @@ public class AttrController {
     @Autowired
     private AttrService attrService;
 
-    @GetMapping("base/list/{catelogId}")
-    public R baseList(@PathVariable("catelogId") Long catelogId, PageAndKeyParams pageAndKeyParams){
-        List<AttrEntity> list=attrService.getBaseAttrList(catelogId,pageAndKeyParams);
+    @GetMapping("/{attrType}/list/{catelogId}")
+    public R baseList(@PathVariable("catelogId") Long catelogId, PageAndKeyParams pageAndKeyParams,
+                      @PathVariable("attrType") String attrType){
+        List<AttrEntity> list=attrService.getBaseAttrList(catelogId,pageAndKeyParams,attrType);
         return R.ok().put("data", CommonPage.restPage(list));
     }
+
     /**
      * 列表
      */
