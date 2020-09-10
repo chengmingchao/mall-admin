@@ -18,5 +18,7 @@ import java.util.Map;
 public interface AttrGroupService extends IService<AttrGroupEntity> {
 
     List<AttrGroupEntity> queryAttrGroupList(Long categoryId, PageAndKeyParams pageAndKeyParams);
+
+    List<AttrGroupEntity> getAttrGroupswithAttr(Long catelogId);
 }
 

@@ -2,6 +2,7 @@ package com.cmc.mall.product.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.cmc.common.utils.PageUtils;
+import com.cmc.mall.product.entity.BrandEntity;
 import com.cmc.mall.product.entity.CategoryBrandRelationEntity;
 import org.apache.ibatis.annotations.Param;
 
@@ -26,5 +27,7 @@ public interface CategoryBrandRelationService extends IService<CategoryBrandRela
     void updateByCategory(Long catId, String name);
 
     void updateByBrand(Long brandId, String name);
+
+    List<BrandEntity> getBrandsByCatId(Long catId);
 }
 

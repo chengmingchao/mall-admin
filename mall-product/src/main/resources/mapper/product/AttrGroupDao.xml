@@ -19,7 +19,9 @@
         <if test="categoryId!=0 and categoryId !=null">
             catelog_id=#{categoryId}
         </if>
-        and (attr_group_id=#{key} or attr_group_name like concat('%', #{key}, '%'))
+        <if test="key !=null and key !=''">
+            and (attr_group_id=#{key} or attr_group_name like concat('%', #{key}, '%'))
+        </if>
     </where>
 </select>
 </mapper>

@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -63,5 +65,18 @@ public class CategoryBrandRelationServiceImpl extends ServiceImpl<CategoryBrandR
     @Override
     public void updateByBrand(Long brandId, String brandName) {
         categoryBrandRelationDao.updateByBrand(brandId,brandName);
+    }
+
+    @Override
+    public List<BrandEntity> getBrandsByCatId(Long catId) {
+        List<Long> brandIds=categoryBrandRelationDao.getBrandIdsBycatId(catId);
+        List<BrandEntity> brandEntities = brandDao.selectBatchIds(brandIds);
+        List<BrandEntity> brandEntityList = brandEntities.stream().map((e) -> {
+            BrandEntity brandEntity = new BrandEntity();
+            brandEntity.setBrandId(e.getBrandId());
+            brandEntity.setName(e.getName());
+            return brandEntity;
+        }).collect(Collectors.toList());
+        return brandEntityList;
     }
 }

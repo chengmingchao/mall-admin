@@ -39,6 +39,19 @@ public class AttrGroupController {
     @Autowired
     private AttrService attrService;
 
+    /**
+     * 查出当前分类下所有的属性分组；
+     * 查出每个属性分组的所有属性
+     * @param catelogId
+     * @return
+     */
+    @GetMapping("{catelogId}/withattr")
+    public R getAttrGroupswithAttr(@PathVariable("catelogId") Long catelogId){
+        List<AttrGroupEntity> list=attrGroupService.getAttrGroupswithAttr(catelogId);
+        return R.ok().put("data",list);
+    }
+
+
     @PostMapping("attr/relation")
     public R attrRelation(@RequestBody AttrAttrgroupRelationEntity[] relationEntities){
         attrService.saveAttrRelation(relationEntities);

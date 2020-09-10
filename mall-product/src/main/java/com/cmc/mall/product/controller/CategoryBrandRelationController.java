@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import com.cmc.mall.product.entity.BrandEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +27,13 @@ import com.cmc.common.utils.R;
 public class CategoryBrandRelationController {
     @Autowired
     private CategoryBrandRelationService categoryBrandRelationService;
+////"/product/categorybrandrelation/brands/list"
 
+    @GetMapping("/brands/list")
+    public R brandsList(@RequestParam("catId") Long catId){
+        List<BrandEntity> list=categoryBrandRelationService.getBrandsByCatId(catId);
+        return R.ok().put("data",list);
+    }
     /**
      * 列表
      */

@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
 import lombok.Data;
 
 /**
@@ -48,4 +50,8 @@ public class AttrGroupEntity implements Serializable {
 
 	@TableField(exist = false)
 	private Long[] catelogPath;
+
+    @TableField(exist = false)
+	private List<AttrEntity> attrs;
+
 }

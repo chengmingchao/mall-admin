@@ -4,8 +4,8 @@ spring:
   cloud:
     nacos:
       discovery:
-#        server-addr: 127.0.0.1:8848
-        server-addr: 10.241.59.8:8848
+        server-addr: 127.0.0.1:8848
+#        server-addr: 10.241.59.8:8848
     gateway:
       routes:
         - id: product
@@ -15,7 +15,14 @@ spring:
           filters:
             - RewritePath=/api/(?<segment>.*),/$\{segment}
 
-        - id: product
+        - id: member
+          uri: lb://mall-member
+          predicates:
+            - Path=/api/member/**
+          filters:
+            - RewritePath=/api/(?<segment>.*),/$\{segment}
+
+        - id: upload
           uri: lb://mall-upload
           predicates:
             - Path=/api/upload/**

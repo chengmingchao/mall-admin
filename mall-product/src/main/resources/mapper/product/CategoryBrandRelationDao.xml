@@ -16,6 +16,10 @@
     select * from pms_category_brand_relation where brand_id=#{brandId}
     </select>
 
+    <select id="getBrandIdsBycatId" resultType="java.lang.Long">
+        select brand_id from pms_category_brand_relation where catelog_id=#{catId}
+    </select>
+
     <update id="updateByCategory">
         update pms_category_brand_relation set
         catelog_name=#{catName}

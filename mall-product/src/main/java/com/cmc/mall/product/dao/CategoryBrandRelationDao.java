@@ -21,4 +21,6 @@ public interface CategoryBrandRelationDao extends BaseMapper<CategoryBrandRelati
 	void updateByCategory(@Param("catId") Long catId,@Param("catName") String catName);
 
     void updateByBrand(@Param("brandId") Long brandId,@Param("brandName") String brandName);
+
+    List<Long> getBrandIdsBycatId(@Param("catId") Long catId);
 }
