@@ -8,6 +8,7 @@
 
 package com.cmc.common.utils;
 
+import io.swagger.models.auth.In;
 import org.apache.http.HttpStatus;
 
 import java.util.HashMap;
@@ -61,4 +62,8 @@ public class R extends HashMap<String, Object> {
 		super.put(key, value);
 		return this;
 	}
+
+	public Integer getCode(){
+	    return Integer.parseInt((String) this.get("code"));
+    }
 }

@@ -3,7 +3,7 @@
 
 <mapper namespace="com.cmc.mall.product.dao.BrandDao">
 
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.cmc.mall.product.entity.BrandEntity" id="brandMap">
         <result property="brandId" column="brand_id"/>
         <result property="name" column="name"/>
@@ -16,7 +16,11 @@
 
     <select id="queryBrandList" resultMap="brandMap">
         select * from pms_brand
-        where brand_id =#{key} or name like concat('%', #{key}, '%')
-        or descript like concat('%', #{key}, '%') or first_letter like concat('%', #{key}, '%')
+        <where>
+            <if test="key !=null and key !=''">
+                brand_id =#{key} or name like concat('%', #{key}, '%')
+                or descript like concat('%', #{key}, '%') or first_letter like concat('%', #{key}, '%')
+            </if>
+        </where>
     </select>
 </mapper>

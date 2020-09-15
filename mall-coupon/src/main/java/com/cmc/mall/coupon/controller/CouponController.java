@@ -6,11 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.cmc.mall.coupon.entity.CouponEntity;
 import com.cmc.mall.coupon.service.CouponService;
@@ -31,17 +27,6 @@ import com.cmc.common.utils.R;
 public class CouponController {
     @Autowired
     private CouponService couponService;
-
-    @Value("${user.name1}")
-    private String username;
-
-    @Value("${user.age}")
-    private Integer age;
-
-    @RequestMapping("test")
-    public R test() {
-        return R.ok().put("username", username).put("age", age);
-    }
 
     @RequestMapping("member/list")
     public R getMemberList() {
@@ -76,7 +61,7 @@ public class CouponController {
     /**
      * 保存
      */
-    @RequestMapping("/save")
+    @PostMapping("/save")
     //@RequiresPermissions("coupon:coupon:save")
     public R save(@RequestBody CouponEntity coupon) {
         couponService.save(coupon);

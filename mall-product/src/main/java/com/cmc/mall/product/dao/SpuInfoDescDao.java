@@ -3,6 +3,9 @@ package com.cmc.mall.product.dao;
 import com.cmc.mall.product.entity.SpuInfoDescEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * spu信息介绍
@@ -13,5 +16,6 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface SpuInfoDescDao extends BaseMapper<SpuInfoDescEntity> {
-	
+
+    void saveSpuInfoDesc(SpuInfoDescEntity spuInfoDescEntity);
 }

@@ -8,6 +8,14 @@
         <result property="spuId" column="spu_id"/>
         <result property="decript" column="decript"/>
     </resultMap>
+    <insert id="saveSpuInfoDesc">
+        insert into pms_spu_info_desc(spu_id,decript)
+        values
+            (
+            #{spuId},
+            #{decript}
+            )
+    </insert>
 
 
 </mapper>

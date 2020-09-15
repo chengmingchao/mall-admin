@@ -15,6 +15,30 @@
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
     </resultMap>
+    <insert id="saveSpuInfo" useGeneratedKeys="true" keyProperty="id">
+        insert into pms_spu_info
+        (
+        spu_name,
+        spu_description,
+        catalog_id,
+        brand_id,
+        weight,
+        publish_status,
+        create_time,
+        update_time
+        )
+        values
+        (
+        #{spuName},
+        #{spuDescription},
+        #{catalogId},
+        #{brandId},
+        #{weight},
+        #{publishStatus},
+        now(),
+        now()
+        )
+    </insert>
 
 
 </mapper>

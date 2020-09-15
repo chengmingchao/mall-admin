@@ -12,6 +12,16 @@
         <result property="imgSort" column="img_sort"/>
         <result property="defaultImg" column="default_img"/>
     </resultMap>
+    <insert id="saveSpuImages">
+        insert into pms_spu_images(spuId,imgUrl)
+        values
+        <foreach collection="spuImagesEntities" item="item" separator=",">
+            (
+            #{item.spuId},
+            #{item.imgUrl}
+            )
+        </foreach>
+    </insert>
 
 
 </mapper>

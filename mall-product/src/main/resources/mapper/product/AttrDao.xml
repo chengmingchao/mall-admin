@@ -25,7 +25,9 @@
             <if test="attrType !=null and attrType !=''">
                 and attr_type=#{attrType}
             </if>
+            <if test="key !=null and key !=''">
             and (attr_id=#{key} or attr_name like concat('%', #{key}, '%') or catelog_id=#{key})
+            </if>
         </where>
     </select>
 
@@ -36,6 +38,8 @@
             #{item}
         </foreach>
         )
+        <if test="key !=null and key !=''">
         and (attr_id=#{key} or attr_name like concat('%', #{key}, '%') or catelog_id=#{key})
+        </if>
     </select>
 </mapper>

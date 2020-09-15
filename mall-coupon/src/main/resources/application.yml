@@ -1,27 +1,24 @@
-#server:
-#  port: 7000
-#
-#spring:
-#  application:
-#    name: mall-coupon
-#  datasource:
-#    url: jdbc:mysql://localhost:3306/mall_sms?characterEncoding=UTF-8
-#    username: root
-#    password: 123
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    type: com.alibaba.druid.pool.DruidDataSource
-#  cloud:
-#    nacos:
-#      discovery:
-#        server-addr: 127.0.0.1:8848
-#
-#mybatis-plus:
-#  mapper-locations: classpath*:/mapper/**/*.xml
-#  type-aliases-package: com.cmc.mall.coupon.entity
-#  global-config:
-#    db-config:
-#      id-type: auto
-#
-#user:
-#  name1: 张三
-#  age: 20
+server:
+  port: 7000
+
+spring:
+  application:
+    name: mall-coupon
+  datasource:
+    url: jdbc:mysql://localhost:3306/mall_sms?characterEncoding=UTF-8
+    username: root
+    password: 123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 10.241.59.8:8848
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  type-aliases-package: com.cmc.mall.coupon.entity
+  global-config:
+    db-config:
+      id-type: auto
+
