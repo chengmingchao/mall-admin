@@ -1,4 +1,4 @@
-package com.cmc.mall.product.entity;
+package com.cmc.common.utils;
 
 import lombok.Data;
 

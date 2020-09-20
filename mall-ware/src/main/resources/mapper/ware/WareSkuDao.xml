@@ -12,6 +12,17 @@
         <result property="skuName" column="sku_name"/>
         <result property="stockLocked" column="stock_locked"/>
     </resultMap>
+    <select id="getList" resultType="com.cmc.mall.ware.entity.WareSkuEntity">
+        select * from wms_ware_sku
+        <where>
+            <if test="skuId !=null and skuId !=''">
+                sku_id=#{skuId}
+            </if>
+            <if test="wareId !=null and wareId !=''">
+                ware_id=#{wareId}
+            </if>
+        </where>
+    </select>
 
 
 </mapper>

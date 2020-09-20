@@ -3,7 +3,7 @@ package com.cmc.mall.product.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.cmc.common.utils.PageUtils;
 import com.cmc.mall.product.entity.BrandEntity;
-import com.cmc.mall.product.entity.PageAndKeyParams;
+import com.cmc.common.utils.PageAndKeyParams;
 
 import java.util.List;
 import java.util.Map;

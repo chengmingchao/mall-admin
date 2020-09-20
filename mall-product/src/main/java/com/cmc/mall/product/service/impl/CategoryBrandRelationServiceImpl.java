@@ -70,13 +70,18 @@ public class CategoryBrandRelationServiceImpl extends ServiceImpl<CategoryBrandR
     @Override
     public List<BrandEntity> getBrandsByCatId(Long catId) {
         List<Long> brandIds=categoryBrandRelationDao.getBrandIdsBycatId(catId);
-        List<BrandEntity> brandEntities = brandDao.selectBatchIds(brandIds);
-        List<BrandEntity> brandEntityList = brandEntities.stream().map((e) -> {
-            BrandEntity brandEntity = new BrandEntity();
-            brandEntity.setBrandId(e.getBrandId());
-            brandEntity.setName(e.getName());
-            return brandEntity;
-        }).collect(Collectors.toList());
-        return brandEntityList;
+        if (brandIds!=null && brandIds.size()!=0){
+            List<BrandEntity> brandEntities = brandDao.selectBatchIds(brandIds);
+            List<BrandEntity> brandEntityList = brandEntities.stream().map((e) -> {
+                BrandEntity brandEntity = new BrandEntity();
+                brandEntity.setBrandId(e.getBrandId());
+                brandEntity.setName(e.getName());
+                return brandEntity;
+            }).collect(Collectors.toList());
+            return brandEntityList;
+        }else{
+            return null;
+        }
+
     }
 }

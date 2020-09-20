@@ -13,6 +13,20 @@
         <result property="wareId" column="ware_id"/>
         <result property="status" column="status"/>
     </resultMap>
+    <select id="getList" resultType="com.cmc.mall.ware.entity.PurchaseDetailEntity">
+        select * from wms_purchase_detail
+        <where>
+            <if test="status !=null and status !=''">
+                status=#{status}
+            </if>
+            <if test="wareId !=null and wareId !=''">
+                AND ware_id=#{wareId}
+            </if>
+            <if test="key !=null and key !=''">
+                AND (id=#{key} or purchase_id=#{key} or sku_id=#{key})
+            </if>
+        </where>
+    </select>
 
 
 </mapper>

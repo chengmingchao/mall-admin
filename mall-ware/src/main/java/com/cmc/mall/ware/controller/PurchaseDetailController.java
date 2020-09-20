@@ -1,8 +1,12 @@
 package com.cmc.mall.ware.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
+import com.cmc.common.utils.CommonPage;
+import com.cmc.common.utils.PageAndKeyParams;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,10 +39,10 @@ public class PurchaseDetailController {
      */
     @RequestMapping("/list")
     //@RequiresPermissions("ware:purchasedetail:list")
-    public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = purchaseDetailService.queryPage(params);
+    public R list(PageAndKeyParams pageAndKeyParams, @RequestParam(value = "status",required = false) Integer status,@RequestParam(value = "wareId",required = false) Long wareId){
+        List<PurchaseDetailEntity> list=purchaseDetailService.getList(pageAndKeyParams,status,wareId);
 
-        return R.ok().put("page", page);
+        return R.ok().put("page", CommonPage.restPage(list));
     }
 
 

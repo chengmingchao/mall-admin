@@ -2,8 +2,10 @@ package com.cmc.mall.product.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.cmc.common.utils.PageUtils;
+import com.cmc.common.utils.PageAndKeyParams;
 import com.cmc.mall.product.entity.SkuInfoEntity;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,5 +18,7 @@ import java.util.Map;
 public interface SkuInfoService extends IService<SkuInfoEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    List<SkuInfoEntity> getList(PageAndKeyParams pageAndKeyParams,SkuInfoEntity skuInfoEntity);
 }
 

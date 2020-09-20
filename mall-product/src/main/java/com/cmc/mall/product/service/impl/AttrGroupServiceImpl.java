@@ -3,27 +3,20 @@ package com.cmc.mall.product.service.impl;
 import com.cmc.mall.product.dao.AttrAttrgroupRelationDao;
 import com.cmc.mall.product.dao.AttrDao;
 import com.cmc.mall.product.entity.AttrEntity;
-import com.cmc.mall.product.entity.PageAndKeyParams;
+import com.cmc.common.utils.PageAndKeyParams;
 import com.cmc.mall.product.service.AttrService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.cmc.common.utils.PageUtils;
-import com.cmc.common.utils.Query;
 
 import com.cmc.mall.product.dao.AttrGroupDao;
 import com.cmc.mall.product.entity.AttrGroupEntity;
 import com.cmc.mall.product.service.AttrGroupService;
-
-import javax.jws.Oneway;
 
 
 @Service("attrGroupService")

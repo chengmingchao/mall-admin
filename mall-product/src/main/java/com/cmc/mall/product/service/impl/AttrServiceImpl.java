@@ -1,15 +1,14 @@
 package com.cmc.mall.product.service.impl;
 
+import com.cmc.common.utils.PageAndKeyParams;
 import com.cmc.mall.product.dao.AttrAttrgroupRelationDao;
 import com.cmc.mall.product.dao.AttrGroupDao;
 import com.cmc.mall.product.dao.CategoryDao;
 import com.cmc.mall.product.entity.*;
-import com.cmc.mall.product.service.AttrAttrgroupRelationService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;

@@ -1,6 +1,6 @@
 package com.cmc.mall.product.service.impl;
 
-import com.cmc.mall.product.entity.PageAndKeyParams;
+import com.cmc.common.utils.PageAndKeyParams;
 import com.cmc.mall.product.service.CategoryBrandRelationService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;

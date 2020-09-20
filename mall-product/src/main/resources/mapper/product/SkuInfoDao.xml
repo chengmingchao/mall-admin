@@ -17,6 +17,28 @@
         <result property="price" column="price"/>
         <result property="saleCount" column="sale_count"/>
     </resultMap>
+    <select id="getList" resultType="com.cmc.mall.product.entity.SkuInfoEntity">
+        select * from pms_sku_info
+        <where>
+            <if test="catalogId !=null and catalogId !=''">
+                AND catalog_id=#{catalogId}
+            </if>
+            <if test="brandId !=null and brandId !=''">
+                AND brand_id=#{brandId}
+            </if>
+            <if test="min !=null and min !=''">
+                AND price &gt;=#{min}
+            </if>
+            <if test="max !=null and max !=''">
+                AND price &lt;=#{max}
+            </if>
+            <if test="skuName !=null and skuName !=''">
+                AND (sku_id =#{skuName} or sku_name like concat('%',#{skuName},'%') or sku_title like concat('%',#{skuName},'%')
+                or sku_subtitle like concat('%',#{skuName},'%') or sku_desc like concat('%',#{skuName},'%')
+                or spu_id=#{skuName} or catalog_id=#{skuName} or brand_id=#{skuName})
+            </if>
+        </where>
+    </select>
 
 
 </mapper>

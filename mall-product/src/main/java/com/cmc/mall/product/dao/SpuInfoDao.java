@@ -4,6 +4,8 @@ import com.cmc.mall.product.entity.SpuInfoEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * spu信息
  * 
@@ -15,4 +17,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface SpuInfoDao extends BaseMapper<SpuInfoEntity> {
 
     void saveSpuInfo(SpuInfoEntity spuInfoEntity);
+
+    List<SpuInfoEntity> getList(SpuInfoEntity spuInfoEntity);
+            ;
 }

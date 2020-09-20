@@ -66,4 +66,8 @@ public class SkuInfoEntity implements Serializable {
 	 */
 	private Long saleCount;
 
+	private BigDecimal min;
+
+	private BigDecimal max;
+
 }

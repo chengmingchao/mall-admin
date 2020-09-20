@@ -2,9 +2,8 @@ package com.cmc.mall.product.dao;
 
 import com.cmc.mall.product.entity.BrandEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.cmc.mall.product.entity.PageAndKeyParams;
+import com.cmc.common.utils.PageAndKeyParams;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 

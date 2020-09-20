@@ -11,5 +11,15 @@
         <result property="areacode" column="areacode"/>
     </resultMap>
 
+    <select id="getList" resultType="com.cmc.mall.ware.entity.WareInfoEntity">
+        select * from wms_ware_info
+        <where>
+            <if test="key!=null and key!=''">
+                (id=#{key} or name like concat('%',#{key},'%') or address like concat('%',#{key},'%')
+                or areacode like concat('%',#{key},'%'))
+            </if>
+        </where>
+    </select>
+
 
 </mapper>

@@ -40,5 +40,24 @@
         )
     </insert>
 
+    <select id="getList" resultType="com.cmc.mall.product.entity.SpuInfoEntity">
+        select * from pms_spu_info
+        <where>
+            <if test="brandId !=null and brandId !=''">
+                AND brand_id=#{brandId}
+            </if>
+            <if test="catalogId !=null and catalogId !=''">
+                AND catalog_id=#{catalogId}
+            </if>
+            <if test="publishStatus !=null and publishStatus !=''">
+                AND publish_status=#{publishStatus}
+            </if>
+            <if test="spuName !=null and spuName !=''">
+                AND (id=#{spuName} or spu_name like concat('%',#{spuName},'%') or spu_description like concat('%',#{spuName},'%')
+                catalog_id=#{spuName} or brand_id=#{spuName} or create_time like concat('%',#{spuName},'%') or update_time like concat('%',#{spuName},'%'))
+            </if>
+        </where>
+    </select>
+
 
 </mapper>

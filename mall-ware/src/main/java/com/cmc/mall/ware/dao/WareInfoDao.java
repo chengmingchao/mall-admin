@@ -3,6 +3,9 @@ package com.cmc.mall.ware.dao;
 import com.cmc.mall.ware.entity.WareInfoEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * 仓库信息
@@ -13,5 +16,6 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface WareInfoDao extends BaseMapper<WareInfoEntity> {
-	
+
+    List<WareInfoEntity> getList(@Param("key") String key);
 }

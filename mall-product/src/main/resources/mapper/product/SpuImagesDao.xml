@@ -13,7 +13,7 @@
         <result property="defaultImg" column="default_img"/>
     </resultMap>
     <insert id="saveSpuImages">
-        insert into pms_spu_images(spuId,imgUrl)
+        insert into pms_spu_images(spu_id,img_url)
         values
         <foreach collection="spuImagesEntities" item="item" separator=",">
             (

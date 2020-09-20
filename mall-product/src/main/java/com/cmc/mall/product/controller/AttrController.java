@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.cmc.common.utils.CommonPage;
-import com.cmc.mall.product.entity.PageAndKeyParams;
+import com.cmc.common.utils.PageAndKeyParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

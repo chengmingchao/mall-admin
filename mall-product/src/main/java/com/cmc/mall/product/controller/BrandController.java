@@ -5,7 +5,7 @@ import java.util.List;
 import com.cmc.common.utils.CommonPage;
 import com.cmc.common.valid.AddGroup;
 import com.cmc.common.valid.UpdateGroup;
-import com.cmc.mall.product.entity.PageAndKeyParams;
+import com.cmc.common.utils.PageAndKeyParams;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

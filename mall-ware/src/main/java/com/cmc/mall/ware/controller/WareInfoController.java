@@ -1,8 +1,11 @@
 package com.cmc.mall.ware.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
+import com.cmc.common.utils.CommonPage;
+import com.cmc.common.utils.PageAndKeyParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,10 +38,10 @@ public class WareInfoController {
      */
     @RequestMapping("/list")
     //@RequiresPermissions("ware:wareinfo:list")
-    public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = wareInfoService.queryPage(params);
+    public R list(PageAndKeyParams pageAndKeyParams){
+        List<WareInfoEntity> list=wareInfoService.getList(pageAndKeyParams);
 
-        return R.ok().put("page", page);
+        return R.ok().put("page", CommonPage.restPage(list));
     }
 
 

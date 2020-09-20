@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class BaseAttrs {
     private Long attrId;
-    private String attrValue;
+    private String attrValues;
     private int showDesc;
 
 }

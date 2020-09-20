@@ -1,19 +1,19 @@
 package com.cmc.mall.product.controller;
 
 import java.util.Arrays;
-import java.util.Map;
+import java.util.List;
 
+import com.cmc.common.utils.CommonPage;
+import com.cmc.common.utils.PageAndKeyParams;
 import com.cmc.mall.product.vo.SpuVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cmc.mall.product.entity.SpuInfoEntity;
 import com.cmc.mall.product.service.SpuInfoService;
-import com.cmc.common.utils.PageUtils;
 import com.cmc.common.utils.R;
 
 
@@ -34,13 +34,12 @@ public class SpuInfoController {
     /**
      * 列表
      */
-//    @RequestMapping("/list")
-//    //@RequiresPermissions("product:spuinfo:list")
-//    public R list(@RequestParam Map<String, Object> params){
-//        PageUtils page = spuInfoService.queryPage(params);
-//
-//        return R.ok().put("page", page);
-//    }
+    @RequestMapping("/list")
+    //@RequiresPermissions("product:spuinfo:list")
+    public R list(PageAndKeyParams pageAndKeyParams,SpuInfoEntity spuInfoEntity){
+        List<SpuInfoEntity> list=spuInfoService.getList(pageAndKeyParams,spuInfoEntity);
+        return R.ok().put("list", CommonPage.restPage(list));
+    }
 
 
     /**

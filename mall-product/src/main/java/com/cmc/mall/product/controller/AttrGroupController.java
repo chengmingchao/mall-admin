@@ -2,12 +2,11 @@ package com.cmc.mall.product.controller;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import com.cmc.common.utils.CommonPage;
 import com.cmc.mall.product.entity.AttrAttrgroupRelationEntity;
 import com.cmc.mall.product.entity.AttrEntity;
-import com.cmc.mall.product.entity.PageAndKeyParams;
+import com.cmc.common.utils.PageAndKeyParams;
 import com.cmc.mall.product.service.AttrService;
 import com.cmc.mall.product.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import com.cmc.mall.product.entity.AttrGroupEntity;
 import com.cmc.mall.product.service.AttrGroupService;
-import com.cmc.common.utils.PageUtils;
 import com.cmc.common.utils.R;
 
 

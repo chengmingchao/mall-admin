@@ -3,6 +3,9 @@ package com.cmc.mall.ware.dao;
 import com.cmc.mall.ware.entity.PurchaseDetailEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * 
@@ -13,5 +16,6 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface PurchaseDetailDao extends BaseMapper<PurchaseDetailEntity> {
-	
+
+    List<PurchaseDetailEntity> getList(@Param("status") Integer status,@Param("wareId") Long wareId,@Param("key") String key);
 }
