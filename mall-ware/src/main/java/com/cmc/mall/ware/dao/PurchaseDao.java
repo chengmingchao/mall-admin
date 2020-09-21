@@ -4,6 +4,8 @@ import com.cmc.mall.ware.entity.PurchaseEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * 采购信息
  * 
@@ -13,5 +15,6 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface PurchaseDao extends BaseMapper<PurchaseEntity> {
-	
+
+    List<PurchaseEntity> getUnreceiveList();
 }

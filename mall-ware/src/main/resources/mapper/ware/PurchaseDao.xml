@@ -16,6 +16,10 @@
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
     </resultMap>
+    <select id="getUnreceiveList" resultType="com.cmc.mall.ware.entity.PurchaseEntity">
+        select * from wms_purchase
+        where status='0' or status='1'
+    </select>
 
 
 </mapper>

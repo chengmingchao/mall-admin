@@ -1,14 +1,13 @@
 package com.cmc.mall.ware.controller;
 
 import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
+import com.cmc.mall.ware.entity.MergeVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.cmc.mall.ware.entity.PurchaseEntity;
 import com.cmc.mall.ware.service.PurchaseService;
@@ -30,6 +29,17 @@ public class PurchaseController {
     @Autowired
     private PurchaseService purchaseService;
 
+    @PostMapping("/merge")
+    public R merge(@RequestBody MergeVo mergeVo){
+        purchaseService.merge(mergeVo);
+        return R.ok();
+    }
+
+    @GetMapping("/unreceive/list")
+    public R unreceiveList(){
+        List<PurchaseEntity> list=purchaseService.getUnreceiveList();
+        return R.ok().put("list",list);
+    }
     /**
      * 列表
      */
@@ -59,6 +69,8 @@ public class PurchaseController {
     @RequestMapping("/save")
     //@RequiresPermissions("ware:purchase:save")
     public R save(@RequestBody PurchaseEntity purchase){
+        purchase.setCreateTime(new Date());
+        purchase.setUpdateTime(new Date());
 		purchaseService.save(purchase);
 
         return R.ok();

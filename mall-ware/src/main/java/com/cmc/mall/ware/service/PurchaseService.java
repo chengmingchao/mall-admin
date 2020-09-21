@@ -2,8 +2,10 @@ package com.cmc.mall.ware.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.cmc.common.utils.PageUtils;
+import com.cmc.mall.ware.entity.MergeVo;
 import com.cmc.mall.ware.entity.PurchaseEntity;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,5 +18,9 @@ import java.util.Map;
 public interface PurchaseService extends IService<PurchaseEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    List<PurchaseEntity> getUnreceiveList();
+
+    void merge(MergeVo mergeVo);
 }
 
